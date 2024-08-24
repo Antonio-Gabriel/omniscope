@@ -13,7 +13,7 @@ from models.helpers.weeks import Weeks
 import pandas as pd
 from models.base.powerdataframe import SummarizablePowerDataFrame
 
-from models.base.cache import cache
+from decorators.cache import cache
 from datetime import datetime
 
 

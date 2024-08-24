@@ -12,6 +12,8 @@ from typing import Optional, Dict
 from models.syntactic import Everhour, User, Client
 import models.syntactic.everhour as e
 
+from decorators import c4_external_system
+
 import pytz
 
 
@@ -93,6 +95,7 @@ class Appointment(e.Appointment):
         return cls(**base_dict)
 
 
+@c4_external_system('Time Tracker (Everhour)', 'Logs EximiaCo engagements, detailing all projects and hours worked')
 class TimeTracker(SemanticModel):
     def __init__(self, everhour=None, ontology=None):
         api_key = api_settings["everhour_api_key"]

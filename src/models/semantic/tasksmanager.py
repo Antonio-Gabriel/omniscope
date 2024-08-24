@@ -4,6 +4,7 @@ from datetime import datetime
 from models.base.semanticmodel import SemanticModel
 from models.syntactic import Todoist
 from models.base.powerdataframe import PowerDataFrame
+from decorators import c4_external_system
 
 import models.syntactic.todoist as t
 
@@ -98,6 +99,10 @@ class Project(BaseModel):
         return any(task.is_late for task in self.tasks)
 
 
+@c4_external_system(
+    "Task Management (TodoIst)",
+    "Organizes non-routine tasks such as project-related tasks"
+)
 class TasksManager(SemanticModel):
     def __init__(self, todoist=None, api_token=None):
         api_token = api_token or api_settings["todoist_api_key"]

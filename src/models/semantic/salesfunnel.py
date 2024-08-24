@@ -11,6 +11,8 @@ from models.syntactic.pipedrive import Pipedrive
 from models.helpers.weeks import Weeks
 import models.helpers.slug as slug
 
+from decorators import c4_external_system
+
 
 class Stage(BaseModel):
     id: int
@@ -67,7 +69,10 @@ class AccountManager(BaseModel):
     def slug(self) -> str:
         return slug.generate(self.name)
 
-
+@c4_external_system(
+    "SalesFunnelB2B (Pipedrive)",
+    "Information about deals and opportunities B2B",
+)
 class SalesFunnelB2B(SemanticModel):
 
     def __init__(self, pipedrive=None, ontology=None):
