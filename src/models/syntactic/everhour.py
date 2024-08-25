@@ -6,7 +6,7 @@ from datetime import datetime
 
 import pytz
 
-from models.base.cache import cache
+from decorators.cache import cache
 import models.helpers.slug as slug
 
 
@@ -113,6 +113,8 @@ class Appointment(BaseModel):
 
 
 class Everhour:
+
+
     def __init__(self, api_token: str):
         self.session = requests.Session()
         self.api_token = api_token

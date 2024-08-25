@@ -1,4 +1,7 @@
+import os
+from decorators import list_c4_external_systems_from_dir
 
+prefix = """
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
@@ -22,14 +25,14 @@ Rel(am, webApp, "Uses", "https")
 Rel(manager, webApp, "Uses", "https")
 
 Rel_Neighbor(webApp, models, "Fetches consolidated data")
-System_Ext(TasksManager, "Task Management (TodoIst)", "Organizes non-routine tasks such as project-related tasks")
-Rel(models, TasksManager, "fetches data from", "REST")
-System_Ext(Ontology, "Ontology (Wordpress)", "Serves as the company's knowledge base, covering concepts, frameworks, clients, and more")
-Rel(models, Ontology, "fetches data from", "REST")
-System_Ext(TimeTracker, "Time Tracker (Everhour)", "Logs EximiaCo engagements, detailing all projects and hours worked")
-Rel(models, TimeTracker, "fetches data from", "REST")
-System_Ext(Insights, "Insights (Wordpress)", "Where EximiaCo shares lessons learned with clients")
-Rel(models, Insights, "fetches data from", "REST")
-System_Ext(SalesFunnelB2B, "SalesFunnelB2B (Pipedrive)", "Information about deals and opportunities B2B")
-Rel(models, SalesFunnelB2B, "fetches data from", "REST")
-@enduml
+"""
+
+semantic_folder = os.path.abspath('../../src/models/semantic')
+external_systems = list_c4_external_systems_from_dir(semantic_folder)
+
+with open('containers.puml', 'w') as file:
+    file.write(prefix)
+    for es in external_systems:
+        file.write(f'System_Ext({es['class_name']}, "{es['name']}", "{es["description"]}")\n')
+        file.write(f'Rel(models, {es['class_name']}, "fetches data from", "REST")\n')
+    file.write('@enduml')

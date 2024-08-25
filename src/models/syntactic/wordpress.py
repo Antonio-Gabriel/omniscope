@@ -7,7 +7,7 @@ from typing import Union, Dict, List, Any, Optional, Type, TypeVar
 from enum import Enum
 
 from models.helpers.weeks import Weeks
-from models.base.cache import cache
+from decorators import cache
 
 import logging
 

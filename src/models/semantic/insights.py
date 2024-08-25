@@ -6,6 +6,8 @@ from pydantic import BaseModel, HttpUrl
 from models.base.semanticmodel import SemanticModel
 from models.syntactic import Wordpress, User, Post
 
+from decorators import c4_external_system
+
 
 class Insight(BaseModel):
     id: int
@@ -29,6 +31,10 @@ class Insight(BaseModel):
         )
 
 
+@c4_external_system(
+    "Insights (Wordpress)",
+    "Where EximiaCo shares lessons learned with clients"
+)
 class Insights(SemanticModel):
     def __init__(self):
         self.wp = Wordpress('https://insights.eximia.co')

@@ -11,6 +11,8 @@ from pydantic import BaseModel, HttpUrl
 from models.base.semanticmodel import SemanticModel
 from models.syntactic import Wordpress, Post, User, EventDetail
 
+from decorators import c4_external_system
+
 
 class Class(BaseModel):
     slug: str
@@ -183,6 +185,10 @@ class Entry(BaseModel):
         )
 
 
+@c4_external_system(
+    "Ontology (Wordpress)",
+    "Serves as the company's knowledge base, covering concepts, frameworks, clients, and more"
+)
 class Ontology(SemanticModel):
     def __init__(self, wordpress=None):
         wordpress_user = api_settings["wordpress_user"]
