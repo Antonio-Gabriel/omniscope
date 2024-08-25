@@ -86,7 +86,11 @@ def list_c4_external_systems_from_file(
             if class_name not in processed_class_names:
                 name = getattr(value, '_c4_external_system_name', None)
                 description = getattr(value, '_c4_external_system_description', None)
-                result.append({'name': name, 'description': description})
+                result.append({
+                    'class_name': class_name,
+                    'name': name,
+                    'description': description
+                })
                 processed_class_names.add(class_name)
 
     return result
