@@ -1,17 +1,17 @@
 import dash_bootstrap_components as dbc
 from datetime import datetime
 from dash import html, dcc, callback, Input, Output
-from flask import session, redirect
+from flask import session, redirect, request
 import globals
 import humanize
 
 
 def render():
-    user_name = session["name"]
-    worker = globals.omni.workers.get_by_name(user_name)
-
-    if worker is None:
-        return html.Div()
+    # user_name = session["user"]["email"]
+    # worker = globals.omni.workers.get_by_name(user_name)
+    #
+    # if worker is None:
+    #     return html.Pre(str(session))
 
     return dbc.Row(
         dbc.DropdownMenu(
@@ -27,7 +27,7 @@ def render():
 
 
 def greeting():
-    full_name = session.get('name', '')
+    full_name = session["user"]["email"]
     name_parts = full_name.split()
     first_name = name_parts[0] if name_parts else 'Guest'
     return f'Hi, {first_name}!'
@@ -49,8 +49,8 @@ def update_time_difference(n):
 def render_link(href):
     if href:
         absolute_url = f"{href}logout"
-        user_name = session["name"]
-        worker = globals.omni.workers.get_by_name(user_name)
+        # user_name = session["user"]["email"]
+        # worker = globals.omni.workers.get_by_name(user_name)
 
         return [dbc.DropdownMenuItem(
             dbc.Row(
@@ -72,7 +72,7 @@ def render_link(href):
             ), disabled=True,
         ),
             dbc.DropdownMenuItem(divider=True, className="bg-dark"),
-            dbc.DropdownMenuItem("My Page", href=str(worker.omni_url)),
+            # dbc.DropdownMenuItem("My Page", href=str(worker.omni_url)),
             dbc.DropdownMenuItem("Logout", href=absolute_url),
             dbc.DropdownMenuItem("Update Now!", href='/hit-refresh', target="_blank")
         ]

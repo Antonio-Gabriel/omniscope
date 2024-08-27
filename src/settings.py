@@ -5,11 +5,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 auth_settings = {
-    "domain": os.environ.get("COGNITO_DOMAIN"),
-    "region": os.environ.get("AWS_REGION"),
-    "secret_key": os.environ.get("SECRET_KEY"),
-    "client_id": os.environ.get("COGNITO_OAUTH_CLIENT_ID"),
-    "client_secret": os.environ.get("COGNITO_OAUTH_CLIENT_SECRET"),
+    "secret_key": os.environ.get("FLASK_SECRET_KEY"),
+    "client_id": os.environ.get("AUTH_CLIENT_ID"),
+    "client_secret": os.environ.get("AUTH_CLIENT_SECRET"),
+    "metadata_url": os.environ.get("AUTH_METADATA_URL"),
     "behind_proxy": os.environ.get("BEHIND_PROXY", False)
 }
 
