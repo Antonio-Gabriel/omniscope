@@ -5,8 +5,6 @@ import ui.layout
 import globals
 import flask
 from flask import jsonify, render_template
-from flask_session import Session
-from markdown import markdown
 
 
 server = flask.Flask(__name__, template_folder='ui/templates')
@@ -15,8 +13,6 @@ server.config.update(
         "SESSION_TYPE": "filesystem",
     }
 )
-
-#Session(server)
 
 from dash_bootstrap_templates import load_figure_template
 

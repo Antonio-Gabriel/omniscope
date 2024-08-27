@@ -7,7 +7,8 @@ matplotlib
 dash
 dash-bootstrap-components
 dash_bootstrap_templates
-dash_cognito_auth
+dash_auth
+authlib
 python-dotenv
 humanize
 dash-ag-grid
